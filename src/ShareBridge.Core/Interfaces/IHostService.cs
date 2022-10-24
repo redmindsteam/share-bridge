@@ -8,6 +8,6 @@ namespace ShareBridge.Core.Interfaces
 {
     public interface IHostService
     {
-        Task<string> GetHostNameAsync();
+        Task<string> GetHostName();
     }
 }

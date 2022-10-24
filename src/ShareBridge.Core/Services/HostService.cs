@@ -10,7 +10,7 @@ namespace ShareBridge.Core.Services
 {
     public class HostService : IHostService
     {
-        public async Task<string> GetHostNameAsync()
+        public async Task<string> GetHostName()
         {
             string hostName = Dns.GetHostName(); // Retrive the Name of HOST
             // Get the IP
