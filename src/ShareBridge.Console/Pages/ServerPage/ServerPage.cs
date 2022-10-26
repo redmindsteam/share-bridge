@@ -8,6 +8,7 @@ namespace ShareBridge.Console.Pages.ServerPage
         public static async Task RunAsync()
         {
             string ip = "192.168.0.102";
+
             string promt = $"Enter your IP address on the second computer!\nYour IP address <->  {ip}";
             string[] options = {"Listener start", "Homepage", "Exit" }; 
             Menu menu = new Menu(promt, options);
