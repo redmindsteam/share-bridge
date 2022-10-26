@@ -8,6 +8,7 @@ namespace ShareBridge.Console.Pages.ServerPage
         public static async Task RunAsync()
         {
             string ip = "192.168.0.102";
+
             string promt = $"Enter your IP address on the second computer!\nYour IP address <->  {ip}";
             FileReceiver fileReceiver = new FileReceiver(ip, 8000);
             fileReceiver.Start();
@@ -22,8 +23,6 @@ namespace ShareBridge.Console.Pages.ServerPage
 
                 default: break;
             }
-
-            
         }
     }
 }
