@@ -10,9 +10,22 @@ namespace ShareBridge.Console.Pages.ServerPage
     {
         public static async Task RunAsync()
         {
-            System.Console.WriteLine("Server started!");
             string Ip = "192.168.1.1";
-            System.Console.WriteLine($"Your IP address {Ip}");
+            string promt = $"Enter your IP address on the second computer!\nYour IP address <->  {Ip}";
+            string[] options = { "Homepage", "Exit" }; 
+            Menu menu = new Menu(promt, options);
+            int selected = menu.Run();
+
+            switch (selected)
+            {
+                case 0: await MainPage.RunAsyn();
+                    break;
+                case 1: return;
+
+                default: break;
+            }
+
+            
         }
     }
 }
