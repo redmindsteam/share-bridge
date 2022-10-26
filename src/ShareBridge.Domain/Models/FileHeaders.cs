@@ -9,7 +9,7 @@ namespace ShareBridge.Domain.Models
         public string FileName { get; set; } = default!;
 
         [Required]
-        public int Lenth { get; set; }
+        public long Lenth { get; set; }
 
         public string Extension { get; set; } = default!;
 

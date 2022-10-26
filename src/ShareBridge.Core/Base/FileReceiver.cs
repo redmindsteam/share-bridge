@@ -32,7 +32,7 @@ namespace ShareBridge.Core.Base
             var fileheaders = JsonConvert.DeserializeObject<FileHeaders>(headerJson);
 
             if (fileheaders is null) throw new Exception("File headers doesn't exist");
-            using (FileStream fs = new FileStream(fileheaders.FileName+fileheaders.Extension, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(fileheaders.FileName, FileMode.OpenOrCreate))
             {
                 while (fileheaders.Lenth > 0)
                 {
