@@ -1,4 +1,4 @@
-﻿using Demo;
+﻿using ShareBridge.Console.Helpers;
 using static System.Console;
 
 namespace ShareBridge.Console.Pages
@@ -10,7 +10,7 @@ namespace ShareBridge.Console.Pages
             Clear();
             string prompt = "Select the desired section!";
             string[] options = {"Server", "Client", "Exit"};
-            Menu menu = new Menu(prompt, options);
+            var menu = new Menu(prompt, options);
             int selected = menu.Run();
 
             switch (selected)
