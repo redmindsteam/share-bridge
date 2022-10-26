@@ -1,7 +1,7 @@
 ﻿using System;
 using static System.Console;
 
-namespace Demo
+namespace ShareBridge.Console.Helpers
 {
     public class Menu
     {

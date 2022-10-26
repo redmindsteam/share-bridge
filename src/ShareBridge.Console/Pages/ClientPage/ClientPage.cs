@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShareBridge.Core.Base;
 using static System.Console;
 
 namespace ShareBridge.Console.Pages.ClientPage
@@ -13,13 +9,15 @@ namespace ShareBridge.Console.Pages.ClientPage
         {
             Clear();
             WriteLine("Enter the IP address of the server computer!");
-            string Ip = ReadLine()!;
+            string ip = ReadLine()!;
             if (true)
             {
-                WriteLine("Enter the File Path! ");
-                string Path = ReadLine()!;
-                WriteLine("Please wait!");
-                WriteLine("Result -> " + "54 % ");
+                WriteLine("Please enter the file path!");
+                string path = ReadLine()!;
+                WriteLine("Sending...");
+                FileSender fileSender = new FileSender(ip, 8000, path);
+                fileSender.Start();
+                WriteLine("Successfully");
             }
             else 
             {
@@ -27,7 +25,6 @@ namespace ShareBridge.Console.Pages.ClientPage
                 ReadLine();
                 await ClientPage.RunAsync();
             }
-            
         }
     }
 }
