@@ -1,4 +1,3 @@
 ﻿using ShareBridge.Console.Pages;
 
-MainPage.RunAsyn();
-
+await MainPage.RunAsyn();
