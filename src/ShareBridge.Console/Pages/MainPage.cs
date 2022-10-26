@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Demo;
+using static System.Console;
 
 namespace ShareBridge.Console.Pages
 {
@@ -12,25 +7,22 @@ namespace ShareBridge.Console.Pages
     {
         public static async Task RunAsyn()
         {
-            System.Console.Clear();
-            System.Console.WriteLine("1. Server");
-            System.Console.WriteLine("2. Client");
-            System.Console.WriteLine("3. Exit");
+            Clear();
+            string prompt = "Select the desired section!";
+            string[] options = {"Server", "Client", "Exit"};
+            Menu menu = new Menu(prompt, options);
+            int selected = menu.Run();
 
-            string selected = System.Console.ReadLine();
-            if (selected == "1")
+            switch (selected)
             {
-                ServerPage.ServerPage.RunAsync();
-            }
-
-            else if (selected == "2")
-            {
-                ClientPage.ClientPage.RunAsync();
-            }
-
-            else
-            {
-                return;
+                case 0: await ServerPage.ServerPage.RunAsync();
+                    break;
+                case 1: await ClientPage.ClientPage.RunAsync();
+                    break;
+                case 2: return;
+                    
+                default:
+                    break;
             }
         }
     }

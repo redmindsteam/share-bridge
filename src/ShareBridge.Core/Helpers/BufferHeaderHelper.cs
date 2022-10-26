@@ -6,7 +6,7 @@ namespace ShareBridge.Core.Helpers
     {
         public static string GetHeaderData(string filepath)
         {
-
+            return "";
         }
     }
 }
