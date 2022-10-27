@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using ShareBridge.Core.Base;
+using ShareBridge.Core.Interfaces;
 using ShareBridge.Core.Services;
+using ShareBridge.Core.Validators;
 using static System.Console;
 
 namespace ShareBridge.Console.Pages.ClientPage
@@ -14,45 +16,35 @@ namespace ShareBridge.Console.Pages.ClientPage
             WriteLine("Enter the IP address of the server computer!");
             string ip = ReadLine()!;
 
-            int dotCount = 0;
-            bool helper = false;
-
-            foreach (var item in ip)
+            if (IpAddressValidator.IsValid(ip))
             {
-                if(item == '.' && helper)
+                IHostService hostService = new HostService();
+                if (hostService.IsConnected(ip))
                 {
-                    dotCount++;
-                    helper = false;
-                }
-                if(45 < (int)item && 58 > (int)item)
-                {
-                    helper = true;
+                key:
+                    FileService fileService = new FileService();
+                    WriteLine("Please enter the file path!");
+                    string path = ReadLine()!;
+                    var item = fileService.GetFileInfo(path);
+                    if (item.FileName is not null)
+                    {
+                        WriteLine("Sending...");
+                        FileSender fileSender = new FileSender(ip, 8000, path);
+                        fileSender.Start();
+                        WriteLine("Successfully");
+                    }
+
+                    else
+                    {
+                        WriteLine("Please enter the correct file path!");
+                        goto key;
+                    }
                 }
                 else
                 {
-                    dotCount--;
-                }
-            }
-
-            if (dotCount == 3)
-            {
-                key:
-                FileService fileService = new FileService();
-                WriteLine("Please enter the file path!");
-                string path = ReadLine()!;
-                var item = fileService.GetFileInfo(path);
-                if (item.FileName is not null)
-                {
-                    WriteLine("Sending...");
-                    FileSender fileSender = new FileSender(ip, 8000, path);
-                    fileSender.Start();
-                    WriteLine("Successfully");
-                }
-
-                else 
-                {
-                    WriteLine("Please enter the correct file path!");
-                    goto key;
+                    WriteLine($"{ip} is disconnect!");
+                    Thread.Sleep(3000);
+                    await RunAsync();
                 }
             }
             else 
