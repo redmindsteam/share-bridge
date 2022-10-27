@@ -1,5 +1,6 @@
 ﻿using ShareBridge.Console.Helpers;
 using ShareBridge.Core.Base;
+using ShareBridge.Core.Interfaces;
 using ShareBridge.Core.Services;
 
 namespace ShareBridge.Console.Pages.ServerPage
@@ -8,10 +9,10 @@ namespace ShareBridge.Console.Pages.ServerPage
     {
         public static async Task RunAsync()
         {
-            HostService hostService = new HostService();
-            string ip = hostService.GetHostName();
+            IHostService hostService = new HostService();
+            string ip = hostService.GetHostIP();
 
-            string promt = $"Enter your IP address on the second computer!\nYour IP address <->  {ip}";
+            string promt = $"Enter your IP address on the second computer!\nYour IP address <->  {ip} {hostService.IsConnected("192.168.0.111")}";
             string[] options = {"Listener start", "Homepage", "Exit" }; 
             Menu menu = new Menu(promt, options);
             int selected = menu.Run();
@@ -31,9 +32,6 @@ namespace ShareBridge.Console.Pages.ServerPage
 
                 default: break;
             }
-            
-            
-
         }
     }
 }

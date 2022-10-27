@@ -8,6 +8,8 @@ namespace ShareBridge.Core.Interfaces
 {
     public interface IHostService
     {
-        string GetHostName();
+        string GetHostIP();
+
+        bool IsConnected(string ip);
     }
 }

@@ -1,21 +1,35 @@
 ﻿using ShareBridge.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace ShareBridge.Core.Services
 {
     public class HostService : IHostService
     {
-        public string GetHostName()
+        public string GetHostIP()
         {
-            string hostName = Dns.GetHostName(); // Retrive the Name of HOST
-            // Get the IP
-            string myIP = Dns.GetHostByName(hostName).AddressList[1].ToString();
-            return myIP;
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
+        public bool IsConnected(string ip)
+        {
+            Ping ping = new Ping();
+            IPAddress address = IPAddress.Parse(ip);
+            PingReply pong = ping.Send(address);
+            if (pong.Status == IPStatus.Success)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }
