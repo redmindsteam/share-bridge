@@ -7,14 +7,23 @@ namespace ShareBridge.Core.Services
     {
         public FileHeaders GetFileInfo(string path)
         {
-            FileHeaders fileHeaders = new FileHeaders();
-            FileInfo fileInfo = new FileInfo(path);
+            try
+            {
+                FileHeaders fileHeaders = new FileHeaders();
+                FileInfo fileInfo = new FileInfo(path);
 
-            fileHeaders.FileName = fileInfo.Name;
-            fileHeaders.Lenth = fileInfo.Length;
-            fileHeaders.Extension = fileInfo.Extension;
+                fileHeaders.FileName = fileInfo.Name;
+                fileHeaders.Lenth = fileInfo.Length;
+                fileHeaders.Extension = fileInfo.Extension;
 
-            return fileHeaders;
+                return fileHeaders;
+            }
+
+            catch
+            {
+                return new FileHeaders();
+            }
+            
         }
     }
 }
