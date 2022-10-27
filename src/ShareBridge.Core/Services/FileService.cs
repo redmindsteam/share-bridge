@@ -25,5 +25,15 @@ namespace ShareBridge.Core.Services
             }
             
         }
+
+        public string GetResoucePath()
+        {
+            string path =  "d://share-bridge";
+            if(Directory.Exists(path) is false)
+            {
+                Directory.CreateDirectory(path);
+            }
+            return path;
+        }
     }
 }
