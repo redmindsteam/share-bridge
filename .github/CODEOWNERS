@@ -1,0 +1,8 @@
+# main code of application
+/src/ShareBridge.Domain/*           @bahodirovich
+/src/ShareBridge.Core/*             @sodiqjonovich
+/src/ShareBridge.Console/*          @shahzodochilov
+
+# resource of application
+/.github/*                          @sodiqjonovich
+/assets/*                          @bahodirovich
